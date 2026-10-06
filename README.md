@@ -37,3 +37,17 @@ AJ Institute of Engineering & Technology, Mangalore
 ## License
 
 This project is created for educational and portfolio purposes.
+
+Folder looks like:
+chalana-portfolio/
+├── index.html
+├── about.html
+├── projects.html
+├── contact.html
+├── README.md
+├── css/
+│   └── style.css
+└── images/
+    ├── resume_screener.png
+    ├── csvinsights.png
+    └── edu.png
