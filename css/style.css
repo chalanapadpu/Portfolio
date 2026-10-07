@@ -1,4 +1,50 @@
-/* Basic reset */
+/* =========================================
+   CSS VARIABLES
+   ========================================= */
+
+:root {
+    --bg-color: #f5f7fb;
+    --surface-color: #ffffff;
+    --text-color: #222;
+    --muted-color: #666;
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --header-bg: #111;
+    --border-color: #d1d5db;
+    --shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    --max-width: 1100px;
+    --radius: 12px;
+    --transition: 0.3s ease;
+}
+
+/* Dark mode colors */
+/* =========================================
+   CUSTOM DARK MODE
+   ========================================= */
+
+[data-theme="dark"] {
+    --bg-color: #080d1a;
+    --surface-color: #111827;
+    --text-color: #f1f5f9;
+    --muted-color: #a8b3c7;
+
+    --primary-color: #60a5fa;
+    --primary-hover: #93c5fd;
+
+    --header-bg: #050914;
+    --border-color: #26344d;
+
+    --shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+
+
+/* =========================================
+   BASIC RESET
+   ========================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -11,14 +57,38 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #222;
-    background: #fff;
+
+    color: var(--text-color);
+    background: var(--bg-color);
+
+    transition:
+        background-color var(--transition),
+        color var(--transition);
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--primary-color);
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
 header {
-    background: #111;
+    background: var(--header-bg);
     color: #fff;
     padding: 1rem 5%;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header nav {
@@ -26,63 +96,351 @@ header nav {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
+
+    max-width: var(--max-width);
+    margin: auto;
 }
 
 nav ul {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.5rem;
+
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-a {
-    color: inherit;
+header a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+
+    transition: color var(--transition);
 }
 
-header a {
-    text-decoration: none;
+header a:hover {
+    color: #93c5fd;
 }
+
+
+/* =========================================
+   DARK MODE BUTTON
+   ========================================= */
+
+#theme-toggle {
+    padding: 0.6rem 1rem;
+
+    border: 1px solid #fff;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #fff;
+
+    cursor: pointer;
+    font-weight: 600;
+
+    transition:
+        background-color var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+#theme-toggle:hover {
+    background: #fff;
+    color: #111;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   MAIN CONTENT
+   ========================================= */
 
 main {
-    max-width: 1100px;
+    width: min(100% - 2rem, var(--max-width));
     margin: auto;
 }
 
 section {
-    padding: 4rem 5%;
+    padding: 4rem 0;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
 }
 
-section a {
-    display: inline-block;
-    margin: 0.5rem 0.5rem 0.5rem 0;
-    padding: 0.7rem 1rem;
-    border: 2px solid #111;
-    text-decoration: none;
+p {
+    color: var(--muted-color);
 }
 
-article {
-    border: 1px solid #ccc;
-    padding: 1.5rem;
-    margin-top: 1rem;
-}
 
-footer {
-    background: #111;
-    color: #fff;
-    padding: 2rem 5%;
+/* =========================================
+   HERO SECTION - CSS GRID
+   ========================================= */
+
+.hero {
+    min-height: 70vh;
+
+    display: grid;
+    place-items: center;
+
     text-align: center;
 }
 
-/* Keyboard accessibility */
+.hero-content {
+    max-width: 750px;
+}
+
+.hero h1 {
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+}
+
+
+/* =========================================
+   BUTTONS - FLEXBOX
+   ========================================= */
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+
+    margin-top: 1.5rem;
+}
+
+.button,
+section a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.7rem 1rem;
+
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+
+    color: var(--primary-color);
+    background: transparent;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    transition:
+        background-color var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.button:hover,
+section a:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   SKILLS - CSS GRID
+   ========================================= */
+
+.skills-list {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 1rem;
+
+    list-style: none;
+    padding: 0;
+}
+
+.skills-list li {
+    padding: 1rem;
+
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+
+    text-align: center;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.skills-list li:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =========================================
+   PROJECTS - CSS GRID
+   ========================================= */
+
+.project-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 2rem;
+}
+
+article {
+    background: var(--surface-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+
+    padding: 1.5rem;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+article img {
+    width: 250px;
+    max-width: 100%;
+    height: auto;
+
+    display: block;
+
+    margin: 1rem auto 1.5rem;
+
+    border-radius: 8px;
+}
+
+article ul {
+    padding-left: 1.5rem;
+}
+
+
+/* =========================================
+   CONTACT FORM
+   ========================================= */
+
+form {
+    max-width: 700px;
+    margin: auto;
+
+    background: var(--surface-color);
+
+    padding: 2rem;
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+input,
+textarea {
+    width: 100%;
+
+    padding: 0.8rem;
+
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+
+    background: var(--bg-color);
+    color: var(--text-color);
+
+    font: inherit;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    padding: 0.75rem 1.25rem;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--primary-color);
+    color: #fff;
+
+    cursor: pointer;
+    font-weight: 600;
+
+    transition:
+        background-color var(--transition),
+        transform var(--transition);
+}
+
+button[type="submit"]:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+footer {
+    background: var(--header-bg);
+    color: #fff;
+
+    padding: 2rem 5%;
+
+    text-align: center;
+}
+
+footer p {
+    color: #fff;
+}
+
+footer nav {
+    display: flex;
+    justify-content: center;
+}
+
+footer nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+/* =========================================
+   KEYBOARD ACCESSIBILITY
+   ========================================= */
+
 a:focus,
 button:focus,
 input:focus,
@@ -91,14 +449,22 @@ textarea:focus {
     outline-offset: 3px;
 }
 
-/* Skip link */
+
+/* =========================================
+   SKIP LINK
+   ========================================= */
+
 .skip-link {
     position: absolute;
+
     left: -9999px;
     top: 10px;
+
     background: #fff;
     color: #000;
+
     padding: 10px;
+
     z-index: 1000;
 }
 
@@ -106,16 +472,56 @@ textarea:focus {
     left: 10px;
 }
 
-article img {
-    width: 250px;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 1rem 0;
+
+/* =========================================
+   MOBILE-FIRST RESPONSIVE DESIGN
+   ========================================= */
+
+/* Tablet */
+@media (min-width: 600px) {
+
+    .skills-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-/* Mobile */
-@media (max-width: 700px) {
+
+/* Desktop */
+@media (min-width: 900px) {
+
+    header {
+        padding: 1rem 5%;
+    }
+
+    .skills-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .project-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    article {
+        padding: 2rem;
+    }
+}
+
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+    section {
+        padding: 5rem 0;
+    }
+}
+
+
+/* Small mobile screens */
+@media (max-width: 599px) {
 
     header nav {
         flex-direction: column;
@@ -126,11 +532,27 @@ article img {
         text-align: center;
     }
 
-    h1 {
-        font-size: 2.2rem;
+    section {
+        padding: 3rem 0;
     }
 
-    section {
-        padding: 3rem 5%;
+    .hero {
+        min-height: 60vh;
+    }
+}
+
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
     }
 }
